@@ -43,6 +43,9 @@ pnpm pack
 dsh plugin --profile vi add ./dsh-value-invest-0.1.0.tgz
 ```
 
+> 仓库发布后请给 GitHub 仓库加上 `dsh-plugin` 话题（官方唯一的发现机制）：
+> `gh repo edit hherosoul/dsh-value-invest --add-topic dsh-plugin`
+
 ## 配置
 
 在 profile 的 `cordis.patch.yml`（或 `$DSH_HOME/cordis.patch.yml`）里覆盖本层：
