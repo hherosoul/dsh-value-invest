@@ -1,0 +1,55 @@
+{
+  "name": "dsh-value-invest",
+  "version": "0.1.0",
+  "description": "Value-investing company analysis for DSH: Munger quality scorecard, three-scenario owner-earnings valuation, margin-of-safety grading, and a compliance gate that blocks stock-picking language. Analyzes businesses, never recommends stocks.",
+  "type": "module",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "dsh-plugin",
+    "value-investing",
+    "fundamental-analysis",
+    "dcf",
+    "compliance"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "prepare": "tsdown",
+    "typecheck": "tsc --noEmit",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "engines": {
+    "dsh": ">=0.2.0 <0.3.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5",
+    "@deepseek-ai/dsh-tools": ">=0.2.0 <0.3.0"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "~4.0.5",
+    "@deepseek-ai/dsh-tools": "0.2.1-rc.2",
+    "@deepseek-ai/schemastery": "~3.18.5",
+    "tsdown": "^0.9.0",
+    "typescript": "^5.6.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hherosoul/dsh-value-invest.git"
+  },
+  "homepage": "https://github.com/hherosoul/dsh-value-invest#readme",
+  "bugs": {
+    "url": "https://github.com/hherosoul/dsh-value-invest/issues"
+  },
+  "license": "MIT",
+  "author": "hherosoul"
+}

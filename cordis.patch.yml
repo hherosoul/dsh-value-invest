@@ -1,0 +1,5 @@
+# 本包被 profile 列出时应用的层。
+# 组合包里必须用包名引用（不是路径），Node 才能解析到已安装的代码。
+- insert:
+    - id: value-invest
+      name: dsh-value-invest
