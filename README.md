@@ -22,15 +22,27 @@ dsh plugin --profile vi add github:hherosoul/dsh-value-invest#v0.1.0
 `vi` 只是示例 profile 名，换成你自己的即可。
 
 GitHub 直装拉的是源码，`dsh` 会运行本包的 `prepare` 构建出 `dist/`。pnpm ≥ 10 默认拒绝执行
-git 依赖的构建脚本，所以**第一次 `add` 会失败**，并打印需要授权的确切包键。把那个键写进该
+git 依赖的构建脚本，所以**第一次 `add` 会失败**，并打印需要授权的确切包键。把那个键**原样**写进该
 profile 的 `pnpm-workspace.yaml`：
 
 ```yaml
 allowBuilds:
-  dsh-value-invest: true
+  dsh-value-invest@https://codeload.github.com/hherosoul/dsh-value-invest/tar.gz/<sha>: true
 ```
 
 然后重新执行 `add`。
+
+> **注意：这个键的形状不是固定的。** pnpm 打印的键取决于它实际走的抓取通道——走 codeload
+> tarball 时是 `dsh-value-invest@https://codeload.github.com/.../tar.gz/<sha>`，走 git 协议时是
+> `dsh-value-invest@git+https://github.com/.../dsh-value-invest.git#<sha>`。网络慢或 `HEAD` 超时
+> 会切换通道，于是第二次尝试打印的键和第一次不同。**永远复制当次报错里的那一行**，别照抄本例；
+> 为避免反复来回，可以直接把两种形状都写上（多写一条不会被用到，不会报错）：
+
+```yaml
+allowBuilds:
+  dsh-value-invest@https://codeload.github.com/hherosoul/dsh-value-invest/tar.gz/<sha>: true
+  dsh-value-invest@git+https://github.com/hherosoul/dsh-value-invest.git#<sha>: true
+```
 
 > 安全提示：授权构建等于允许本包代码在安装时于你的机器上执行，且不在 agent 沙箱内。
 > 只对源码可信的包授权，并锁 commit（`github:hherosoul/dsh-value-invest#<sha>`），
@@ -43,7 +55,7 @@ pnpm pack
 dsh plugin --profile vi add ./dsh-value-invest-0.1.0.tgz
 ```
 
-> 仓库发布后请给 GitHub 仓库加上 `dsh-plugin` 话题（官方唯一的发现机制）：
+> 仓库已带 `dsh-plugin` 话题（官方唯一的发现机制）。自己重新建库时记得加上：
 > `gh repo edit hherosoul/dsh-value-invest --add-topic dsh-plugin`
 
 ## 配置
